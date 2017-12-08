@@ -5,6 +5,7 @@ Create a virtualenv in the directory, install django 2.*, and run the server usi
 Tech Stack
 -----
 Back-end: Django
+
 Front-end: Vue.js
 
 Explanation of design
