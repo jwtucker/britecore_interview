@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Britecore interview submission</title>
+    </head>
+    <body>
+    <!-- <script src="https://unpkg.com/vue"></script> -->
+
+
+    <h1>Risk Types (full list, all values)</h1>
+    <div id="application">
+      <div v-for="risk_type_entry in risk_types_full">
+        <ul>
+          <li> risk type: {{risk_type_entry.risk_type__name}} </li>
+          <li> label: {{risk_type_entry.label}} </li>
+          <li v-if="risk_type_entry.type == 'GenericRiskFieldDate'"><input type="date" :value="risk_type_entry.value"></li>
+          <li v-if="risk_type_entry.type == 'GenericRiskFieldNumber'"><input type="number" :value="risk_type_entry.value"></li>
+          <li v-if="risk_type_entry.type == 'GenericRiskFieldText'"><TEXTAREA rows=20>{{risk_type_entry.value}}</TEXTAREA><
+          <li v-if="risk_type_entry.type == 'GenericRiskFieldEnum'">
+            <select name="" id="">
+              <option value="y" :selected="risk_type_entry.value == 'y'">Yes</option>
+              <option value="n" :selected="risk_type_entry.value == 'n'">No</option>
+              <option value="m" :selected="risk_type_entry.value == 'm'">Maybe</option>
+            </select>
+          </li>
+        </ul> 
+      </div>
+
+    <h1>Risk Type (single, no routing so this is effectively static)</h1>
+      <div v-for="risk_type_entry in risk_types_single">
+        <ul>
+          <li> risk type: {{risk_type_entry.risk_type__name}} </li>
+          <li> label: {{risk_type_entry.label}} </li>
+          <li v-if="risk_type_entry.type == 'GenericRiskFieldDate'"><input type="date" :value="risk_type_entry.value"></li>
+          <li v-if="risk_type_entry.type == 'GenericRiskFieldNumber'"><input type="number" :value="risk_type_entry.value"></li>
+          <li v-if="risk_type_entry.type == 'GenericRiskFieldText'"><TEXTAREA rows=20>{{risk_type_entry.value}}</TEXTAREA></li>
+          <li v-if="risk_type_entry.type == 'GenericRiskFieldEnum'">
+            <select name="" id="">
+              <option value="y" :selected="risk_type_entry.value == 'y'">Yes</option>
+              <option value="n" :selected="risk_type_entry.value == 'n'">No</option>
+              <option value="m" :selected="risk_type_entry.value == 'm'">Maybe</option>
+            </select>
+          </li>
+        </ul> 
+      </div>
+    <div>
+
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script>
+    var app = new Vue({
+      el: '#application',
+      data:{
+        risk_types_full: [],
+        risk_types_single: []
+      },
+      created() {
+        var self = this;
+        $.get('api/get_all_risk_types', function(data){
+          console.log(data)
+          self.risk_types_full = data['data']
+        })
+        $.get('api/get_risk_type', function(data){
+          console.log(data)
+          self.risk_types_single = data['data']
+        })
+      }
+    });
+    </script>
+    </body>
+</html>
