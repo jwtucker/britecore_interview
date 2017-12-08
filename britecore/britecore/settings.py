@@ -25,7 +25,7 @@ SECRET_KEY = '7=k1fw!hmi#lqq_4rewp)vh=$5z2dl68n)0^y+g)fv7s7*k((p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [dev.yeschef.com]
 
 
 # Application definition
