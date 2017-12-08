@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from britecore_interview import models
+from britecore import models
 from django.db.models import Value, CharField
 
 
